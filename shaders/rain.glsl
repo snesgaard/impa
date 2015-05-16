@@ -85,7 +85,7 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
   vec2 s = vec2(screen_coords) + campos * 2;
 
   float f = 0.005 * 2 * M_PI;
-  float ft = 1 * 2 * M_PI;
+  float ft = 5 * 2 * M_PI;
   float d = dot(s, dir);
 
   float nf = 0.05 * 2 * M_PI;
