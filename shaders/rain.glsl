@@ -1,10 +1,14 @@
 uniform float time;
-uniform vec2 resolution;
+uniform vec2 direction;
 uniform vec2 campos;
-uniform float hue;
+uniform float scale;
 uniform float fade;
-uniform float slow;
-uniform float gray;
+uniform float spatialfreq;
+uniform float temporalfreq;
+uniform float normalfreq;
+uniform float spatialvar;
+uniform float spatialthreshold;
+uniform float normalthreshold;
 
 //
 // Description : Array and textureless GLSL 2D simplex noise function.
@@ -80,23 +84,24 @@ float snoise(vec2 v)
 #define M_PI 3.1415926535897932384626433832795
 
 vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
-  vec2 dir = vec2(1, 1);
+  vec2 dir = direction;
+  dir = dir / length(dir);
   vec2 norm = vec2(-dir.y, dir.x);
-  vec2 s = vec2(screen_coords) + campos * 2;
+  vec2 s = vec2(screen_coords) + campos * scale;
 
-  float f = 0.005 * 2 * M_PI;
-  float ft = 5 * 2 * M_PI;
+  float f = spatialfreq * 2 * M_PI;
+  float ft = temporalfreq * 2 * M_PI;
   float d = dot(s, dir);
 
-  float nf = 0.05 * 2 * M_PI;
+  float nf = normalfreq * 2 * M_PI;
   float nd = dot(s, norm);
   float nunwrap = floor(nf * nd / 2 / M_PI);
 
   float p = snoise(vec2(nunwrap));
-  float l = snoise(vec2(p));
-  float i = step(-0.1, sin(f * d * (l + 1) * 0.5 + ft * time + p * 5.0));
+  float l = snoise(vec2(snoise(vec2(p))));
+  float i = step(spatialthreshold, sin((f + abs(l) * spatialvar) * d + ft * time + p * 5.0));
 
-  float ni = step(0.95, sin(nf * nd));
+  float ni = step(normalthreshold, sin(nf * nd));
 
 
   return vec4(vec3(1.0), fade * i * ni);
