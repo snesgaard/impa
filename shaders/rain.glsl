@@ -92,17 +92,17 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
   float f = spatialfreq * 2 * M_PI;
   float ft = temporalfreq * 2 * M_PI;
   float d = dot(s, dir);
+  float gunwrap = floor((f * d + time * ft) / 2 / M_PI);
 
   float nf = normalfreq * 2 * M_PI;
   float nd = dot(s, norm);
   float nunwrap = floor(nf * nd / 2 / M_PI);
 
-  float p = snoise(vec2(nunwrap));
-  float l = snoise(vec2(snoise(vec2(p))));
+  float p = snoise(vec2(nunwrap, gunwrap));
+  float l = snoise(vec2(snoise(vec2(p, gunwrap))));
   float i = step(spatialthreshold, sin((f + abs(l) * spatialvar) * d + ft * time + p * 5.0));
 
   float ni = step(normalthreshold, sin(nf * nd));
-
 
   return vec4(vec3(1.0), fade * i * ni);
 }

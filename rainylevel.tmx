@@ -41,7 +41,7 @@
  </tileset>
  <layer name="game" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlYuKwyAURI1CN///xV0hFy7TMyb7oLGgMCS2xhznjqaWeVs7NGurZW6+T/Cv3g0xaLPX9xP8m5mv13b71uPQ1704Ly3273ao33fOvczBGny1vLJ2dcZHur67Rf7Cu7iv5r/OuafrO/hybeNe2dTj+C/ndk/9/+YLngZX8pN8zuNzJv7CGxx5bvVxK+xdk+eJNa6/Zc3vy0z5veRTHq+ceV0N9JP9lj3TnBEP7Znsffbf1T7XQnOwp/4Oc2pNlUtzSRzK4ubUNbns57Hqo6vTBnK+6Tzu2bMM6Vooj5pT8kO9U6ZmxmjWaR3kJdWY9oM7P5XL1e1s3ZR/mpf2pHo0qpXm2nk8qq16ROeeOwOphtqnc5J+d2yjzNP3TtfkuOiMGJ2fLrejOpK3tH9obvL4yjfAMVFuRtmjd7k9TbWhvsslSWuqvFe+Oe4MHfl/lY/qQNkc6Wz+paWlpaWlpfv1BC8SB3E=
+   eJztlY2KwzAMg9sUevf+T7wFagjaJyc7OJpCDKLdmh9ZlpOyzRvHhVmjbHPze4J+5W4SScxe3yfoNzO/Wtv9jfPC7710PiL6d79Q34Pnz428IoJf2T65VlSOZ/P8Jk7BXyL8F9rFezHfKs/QVvf/D8T+wSHelZtq3M4jUC0OQIH/dM+WzwFP0pN0bsc76Hg3V3Nov6uO+8ba6XzVlPTSfNVXuhfVqsi+lDfxoG8Z31GNSU+nC+VNtclq786Knp+ppspLfek8dZi1XD+SNpQz+XK0Nk43XcfN7XnInQ1tTuQTyrHVyp0zOka93qs18dQ+1v523LUGLqcsb/I/rZudG1kPqr97Gme1pbNRvUhnC43RfqVecj3muGWez+4m9RF5TfvZ+YV8l2mZaUv9Q2uTxiN3gONEvsm8R3u5nqba0G/nS4LWVPmO3DnuDM30H+VHdSBvZuitv7CwsLCwsHA/Xl0oB/w=
   </data>
  </layer>
 </map>
