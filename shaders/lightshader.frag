@@ -32,6 +32,7 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
   vec3 pos = vec3(campos + screen_coords * scale, 0.0);
   // Go through all lights and calculate the diffuse component
   vec3 diffuse = vec3(0.0);
+  vec3 specular = vec3(0.0);
   for (int i = 0; i < lights; i++) {
     // First calculate attenuation
     vec3 dlight = lightpos[i] - pos;
@@ -41,6 +42,13 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec3 nlight = normalize(dlight);
     float diffcoff = max(0.0, dot(nlight, normal));
     diffuse += att * diffcoff * lightcolor[i] * tcolor.xyz;
+    // Now specular component
+    vec3 indice = -nlight; //a unit vector
+    vec3 reflection = reflect(indice, normal); //also a unit vector
+    vec3 surf2cam = vec3(0.0, 0.0, 1.0); //also a unit vector
+    float cosAngle = max(0.0, dot(surf2cam, reflection));
+    float specularCoefficient = pow(cosAngle, 10);
+    specular += att * specularCoefficient * tcolor.xyz * lightcolor[i];
   }
   vec3 ortho = vec3(0.0);
   for (int i = 0; i < ortholights; i++) {
@@ -51,7 +59,8 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
   // Calucate the ambient contribution
   vec3 ambient = ambientcolor * tcolor.xyz * ambientcoeffecient;
   // Obtain final linear color
-  vec3 lincolor = ambient + diffuse + ortho;
+  vec3 lincolor = ambient + diffuse + ortho + specular;
+  // lincolor = specular;
   // Now do gamma correction and return result
   return vec4(pow(lincolor, gamma), tcolor.a) * color;
 }
