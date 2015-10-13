@@ -1,8 +1,9 @@
 return {
   version = "1.1",
   luaversion = "5.1",
-  tiledversion = "0.11.0",
+  tiledversion = "0.14.1",
   orientation = "orthogonal",
+  renderorder = "right-down",
   width = 40,
   height = 40,
   tilewidth = 16,
@@ -26,6 +27,7 @@ return {
       },
       properties = {},
       terrains = {},
+      tilecount = 25,
       tiles = {
         {
           id = 0,
