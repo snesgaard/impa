@@ -1,4 +1,4 @@
-#define MAXLIGHTS 10
+#define MAXLIGHTS 20
 
 uniform sampler2D normalmap;
 
