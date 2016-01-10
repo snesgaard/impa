@@ -25,7 +25,7 @@ uniform vec3 gamma;
 vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
   // First read the necessary data
-  vec2 ncoord = vec2(screen_coords.x, -screen_coords.y) * scale;
+  vec2 ncoord = vec2(screen_coords.x - campos.x, -screen_coords.y - campos.y) * scale;
   vec3 normal = Texel(normalmap, ncoord).xyz;
   normal = normalize(normal - vec3(0.5));
   vec4 tcolor = Texel(texture, texture_coords);
@@ -53,8 +53,16 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
   vec3 ortho = vec3(0.0);
   for (int i = 0; i < ortholights; i++) {
     vec3 nlight = normalize(orthodir[i]);
+    // Calculate diffuse coeffecient
     float diffcoff = max(0.0, dot(nlight, normal));
     ortho += orthocoeffecient[i] * diffcoff * orthocolor[i] * tcolor.xyz;
+    // Now calculate the specular component
+    vec3 indice = -nlight; //a unit vector
+    vec3 reflection = reflect(indice, normal); //also a unit vector
+    vec3 surf2cam = vec3(0.0, 0.0, 1.0); //also a unit vector
+    float cosAngle = max(0.0, dot(surf2cam, reflection));
+    float specularCoefficient = pow(cosAngle, 40);
+    //ortho += orthocoeffecient[i] * specularCoefficient * tcolor.xyz * orthocolor[i];
   }
   // Calucate the ambient contribution
   vec3 ambient = ambientcolor * tcolor.xyz * ambientcoeffecient;
